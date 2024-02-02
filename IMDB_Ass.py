@@ -13,7 +13,8 @@ Created on Tue Jan 30 12:16:07 2024
 #####################
 
 import pandas as pd
-import matplotlib.pyplot as plt
+# import seaborn as sn
+# import matplotlib.pyplot as plt
 
 
 #####################
@@ -51,8 +52,8 @@ high_rat = high_rat.reset_index(drop=True)
 
 high_rat_tit = high_rat.at[0, "Title"] 
 
-print("\n" "The highest rated movie is:") 
-print(high_rat_tit)
+# print("\n" "The highest rated movie is:") 
+# print(high_rat_tit)
 
 
 ##############################
@@ -67,8 +68,8 @@ rel_2016 = pd.DataFrame(rel_2016)
 
 rel_2016 = len(rel_2016["Year"])
 
-print("\n" "Movies released in 2016:") 
-print(rel_2016)
+# print("\n" "Movies released in 2016:") 
+# print(rel_2016)
 
 
 ##################################################################
@@ -85,11 +86,11 @@ direc_ChrisN = len(ChrisN["Director"])
 
 rat_ChrisN = ChrisN["Rating"].mean()
 
-print("\n" "Movies directed by Christopher Nolan:") 
-print(direc_ChrisN)
+# print("\n" "Movies directed by Christopher Nolan:") 
+# print(direc_ChrisN)
 
-print("\n" "Median rating of movies directed by Christopher Nolan:") 
-print(rat_ChrisN)
+# print("\n" "Median rating of movies directed by Christopher Nolan:") 
+# print(rat_ChrisN)
 
 
 ##########################################
@@ -104,8 +105,8 @@ rat_8 = pd.DataFrame(rat_8)
 
 rat_8 = len(rat_8["Rating"])
 
-print("\n" "Number of movies with a rating of at least 8:") 
-print(rat_8)
+# print("\n" "Number of movies with a rating of at least 8:") 
+# print(rat_8)
 
 
 ##########################################
@@ -120,16 +121,16 @@ Yr_avg_rat = Yr_avg_rat["Rating"].mean()
 
 Yr_avg_rat = pd.DataFrame(Yr_avg_rat)
 
-# Yr_avg_rat = Yr_avg_rat["Rating"].max()
+# # Yr_avg_rat = Yr_avg_rat["Rating"].max()
 
-print("\n" "Year with highest avg rating:") 
-print(Yr_avg_rat.idxmax()) 
+# print("\n" "Year with highest avg rating:") 
+# print(Yr_avg_rat.idxmax()) 
 
- # x_Yr_avg_rat = Yr_avg_rat.index
+#  # x_Yr_avg_rat = Yr_avg_rat.index
 
-# plt.bar(Yr_avg_rat.index,Yr_avg_rat["Rating"])
-# plt.ylim(6,7.5)
-# plt.show()
+# # plt.bar(Yr_avg_rat.index,Yr_avg_rat["Rating"])
+# # plt.ylim(6,7.5)
+# # plt.show()
 
 
 ########################################################################
@@ -144,8 +145,8 @@ Yr_perc_2006= len(Yr_perc_2006["Year"])
 
 per_inc = ((rel_2016-Yr_perc_2006)/Yr_perc_2006)*100
 
-print("\n" "The % incraese of movies released in 2016 compared to 2006.") 
-print(per_inc) 
+# print("\n" "The % incraese of movies released in 2016 compared to 2006.") 
+# print(per_inc) 
 
 
 ##########################################
@@ -164,8 +165,8 @@ avg_tot_rev = avg_tot_rev.reset_index(drop=True)
 
 avg_tot_rev = avg_tot_rev["Revenue (Millions)"].mean()
 
-print("\n" "The average revenue over all the movies (Millions):") 
-print(avg_tot_rev) 
+# print("\n" "The average revenue over all the movies (Millions):") 
+# print(avg_tot_rev) 
 
 
 
@@ -184,8 +185,8 @@ avg_rev_2015_2017 = pd.concat([avg_rev_2015,avg_rev_2016], ignore_index=True)
 
 avg_rev_2015_2017 = avg_rev_2015_2017["Revenue (Millions)"].mean()
 
-print("\n" "The average revenue the movies in 2015 and 2016 (Millions):") 
-print(avg_rev_2015_2017) 
+# print("\n" "The average revenue the movies in 2015 and 2016 (Millions):") 
+# print(avg_rev_2015_2017) 
 
 
 ##########################################
@@ -246,8 +247,8 @@ gen_count = gen_count.reset_index().rename(columns={"index":"gen_name"})
 
 gen_count = len(gen_count["gen_name"])
 
-print("\n" "The number of unique genres is;") 
-print(gen_count) 
+# print("\n" "The number of unique genres is;") 
+# print(gen_count) 
 
 
 ##########################################
@@ -257,4 +258,58 @@ print(gen_count)
 ##########################################
 
 Mov_set_corr = mov_set.corr() 
+
+# fig, ax = plt.subplots(figsize=(10, 6))
+
+# # sns.heatmap(Mov_set_corr.corr(), ax=ax, annot=True)
+
+
+
+
+
+
+
+
+
+##########################################
+#
+#   Answers to Questions in order
+#
+##########################################
+
+print("\n" "The answer to Q1 is:") 
+print("(The highest rated movie) \n", high_rat_tit)
+
+print("\n" "The answer to Q2 is:") 
+print("(The average revenue over all the movies (Millions)) \n", avg_tot_rev) 
+
+print("\n" "The answer to Q3 is:") 
+print("(The average revenue the movies in 2015 and 2016 (Millions))", avg_rev_2015_2017) 
+
+print("\n" "The answer to Q4 is:") 
+print("(Movies released in 2016) \n", rel_2016)
+
+print("\n" "The answer to Q5 is:") 
+print("(Movies directed by Christopher Nolan) \n", direc_ChrisN)
+
+print("\n" "The answer to Q6 is:") 
+print("(Number of movies with a rating of at least 8) \n", rat_8)
+
+print("\n" "The answer to Q7 is:") 
+print("(Median rating of movies directed by Christopher Nolan) \n", rat_ChrisN)
+
+print("\n" "The answer to Q8 is:") 
+print("(Year with highest avg rating) \n", Yr_avg_rat.idxmax()) 
+
+print("\n" "The answer to Q9 is:") 
+print("(The % incraese of movies released in 2016 compared to 2006.) \n", per_inc) 
+
+print("\n" "The answer to Q10 is:") 
+print("(The most common actor is) \n", com_act)
+
+print("\n" "The answer to Q11 is:") 
+print("(The number of unique genres) \n", gen_count) 
+
+
+
 
