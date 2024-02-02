@@ -185,7 +185,7 @@ avg_rev_2015_2017 = pd.concat([avg_rev_2015,avg_rev_2016], ignore_index=True)
 avg_rev_2015_2017 = avg_rev_2015_2017["Revenue (Millions)"].mean()
 
 print("\n" "The average revenue the movies in 2015 and 2016 (Millions):") 
-print(avg_rev_2015_2017 ) 
+print(avg_rev_2015_2017) 
 
 
 ##########################################
@@ -196,17 +196,65 @@ print(avg_rev_2015_2017 )
 
 actors = mov_set["Actors"]
 
+# actors['Actors'].explode().value_counts()
+
 actors = pd.DataFrame(actors)
 
-actors['Actors'].tolist()
+actors["Actors"] = actors["Actors"].str.replace(r',\s+', ",", regex=True)
 
+actors["Actors"] = actors["Actors"].str.replace(r'\s+,', ",", regex=True)
 
-# actors['Actors'].explode().value_counts()
+actors["Actors"] = actors["Actors"].str.split(',')
+
+# actors["Actors"].str.match(...).str.get(0).groupby(lambda x: x).count()
+# 
+# counted = actors["Actors"].value_counts()
+
+act_count = actors['Actors'].explode().value_counts()
 
 # actors['Actors'].apply(pd.Series).stack().value_counts()
 
+act_count = act_count.reset_index().rename(columns={"index":"act_name"})	
+
+high_act = act_count["Actors"].max()
+
+high_act = act_count[act_count["Actors"] == high_act]
+
+high_act = high_act.reset_index(drop=True)
+
+com_act = high_act.at[0, "act_name"] 
+
+print("\n" "The most common actor is:") 
+print(com_act)
 
 
+##########################################
+#
+#   Number of unique genres
+#
+##########################################
+
+gen = mov_set["Genre"]
+
+gen = pd.DataFrame(gen)
+
+gen["Genre"] = gen["Genre"].str.split(',')
+
+gen_count = gen["Genre"].explode().value_counts()
+
+gen_count = gen_count.reset_index().rename(columns={"index":"gen_name"})		
+
+gen_count = len(gen_count["gen_name"])
+
+print("\n" "The number of unique genres is;") 
+print(gen_count) 
 
 
+##########################################
+#
+#   Correlation of numerical features
+#
+##########################################
+
+Mov_set_corr = mov_set.corr() 
 
